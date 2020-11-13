@@ -5,15 +5,15 @@
  
  var engine, world;
  var score = 0;
- var bg = "images/dayImage.png";
+ var bg = "js/dayimage.png";
  var backgroundImg;
 
  function preload(){
     getBackgroundImg(); 
- }
+     }
  
  function setup(){
-     var canvas = createCanvas(1600,600);
+     createCanvas(1600,600);
      engine = Engine.create();
      world = engine.world;
 
@@ -60,12 +60,17 @@
  
  function draw(){
 
-   if(background)
+   if(backgroundImg)
       background(backgroundImg);
 
      Engine.update(engine);
 
+     fill("RED");
+     textSize(20);
      text("SCORE : "+score,750,40);
+
+     textSize(15);
+     text("Press Space Button to Attach the Polygon",550,550);
 
      ground.display();
      ground1.display();
@@ -98,17 +103,12 @@
     block28.display();
 
     polygon.display();
-
     sling.display();
  }
- 
-
 
  function mouseDragged(){
    Matter.Body.setPosition(polygon.body, {x: mouseX , y: mouseY});
 }
-
-
 function mouseReleased(){
    sling.fly();
 }
@@ -127,11 +127,11 @@ async function getBackgroundImg(){
    var datetime = responseJSON.datetime;
    var hour = datetime.slice(11,13);
    
-   if(hour>=0600 && hour<=1900){
-       bg = "images/dayImage.png";
+   if(hour>=06 && hour<=19){
+       bg = "js/dayimage.png";
    }
    else{
-       bg = "sprites/nightImage.png";
+       bg = "js/nightimage.png";
    }
 
    backgroundImg = loadImage(bg);
